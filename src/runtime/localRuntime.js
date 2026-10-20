@@ -50,6 +50,12 @@ function runSimple(source,lang){
  else if(lang==='Bash'||lang==='Shell'){extractPrintArgs(s,'echo\\s+(.+?)(?:;|$)',env,out)}
  else if(lang==='R'){extractPrintArgs(s,'(?:print|cat)\\s*\\(([\\s\\S]*?)\\)',env,out)}
  else if(lang==='Lua'){extractPrintArgs(s,'print\\s*\\(([\\s\\S]*?)\\)',env,out)}
+ else if(lang==='Rust'){extractPrintArgs(s,'(?:println|print)!\\s*\\(([\\s\\S]*?)\\)',env,out)}
+ else if(lang==='Haskell'){extractPrintArgs(s,'(?:putStrLn|putStr)\\s+("[^"]*"|\\w+)',env,out)}
+ else if(lang==='Erlang'){extractPrintArgs(s,'io:format\\s*\\(\\s*("[^"]*")',env,out)}
+ else if(lang==='OCaml'){extractPrintArgs(s,'(?:print_endline|print_string)\\s+("[^"]*")',env,out)}
+ else if(lang==='Objective-C'){extractPrintArgs(s,'NSLog\\s*\\(\\s*@("[^"]*")',env,out)}
+ else if(lang==='Vim script'){extractPrintArgs(s,'echo\\s+(.+?)(?:;|$)',env,out)}
  else if(lang==='Perl'){extractPrintArgs(s,'print\\s+(.+?);',env,out)}
  else if(lang==='SQL'){extractPrintArgs(s,'SELECT\\s+(.+?);',env,out)}
  else {extractPrintArgs(s,'(?:print|println|puts|writeln|Put_Line|printfn)\\s*\\(?\s*([\s\S]*?)\s*\)?\s*;?',env,out)}
