@@ -34,3 +34,10 @@ FreeCompile currently does **not** contain full native toolchains for C/C++, .NE
 Full support for all language versions and arbitrary libraries would require bundling and maintaining the corresponding compilers/runtimes and library distributions locally; that is a substantially larger engineering and asset-packaging effort than a lightweight browser app. No external online compiler service is connected by this project.
 
 Treat code execution as a learning sandbox, not a hardened security boundary for hostile source. The JavaScript preview uses a sandboxed iframe.
+
+
+## GitHub Runner capabilities
+
+The runner inspects a public repository tree (up to 1,000 entries), detects common language/framework manifests and likely entry points, summarizes npm scripts and dependencies, and lets users open supported source files in the editor. Pure static HTML projects can be previewed in a sandboxed iframe with supported relative CSS, JavaScript, and image assets fetched from the repository and inlined. File reads are limited to 1 MB per file and the preview attempts at most 30 local assets.
+
+This is not a universal remote build system. React/Vite, Next.js, Node.js servers, package installation, Python virtual environments/packages, Docker, .NET, PHP frameworks, and native compiler projects are detected and inspected but cannot be claimed as fully running without their local toolchains. No hosted compiler or execution API is used.
