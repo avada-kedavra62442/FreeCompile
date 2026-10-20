@@ -22,10 +22,10 @@ GitHub Actions runs both checks on pushes and pull requests.
 
 - **HTML, CSS and JavaScript:** browser sandbox preview.
 - **JSON:** local parsing and formatting.
-- **Python:** an in-repository interpreter for expressions, variables, built-in numeric/string/list helpers, list indexing, `print`, `input`, `if/elif/else`, `for`, `range`, `while`, `break` and `continue`. It enforces an execution-step limit.
+- **Python:** an in-repository educational interpreter for a limited subset: expressions, variables, selected numeric/string/list helpers, list indexing, `print`, `input`, `if/elif/else`, `for`, `range`, `while`, `break` and `continue`. It does not execute imports or arbitrary Python modules and enforces an execution-step limit. For example, `import os` is unsupported; this is not CPython.
 - **C, C++, C#, PHP and additional language workspaces:** small in-repository interpreters for documented common output patterns and simple values.
 - **React / Next.js:** basic JSX-to-HTML preview for components returning intrinsic HTML elements.
-- **Public GitHub project inspection:** used only when explicitly requested to read repository metadata/files; it is not a compiler or execution service.
+- **Public GitHub project inspection:** used only when explicitly requested to read repository metadata/files; it is not a compiler or execution service. Node detection relies on server/runtime signals rather than treating every `package.json` as a Node application.
 
 ## Honest compatibility limits
 
