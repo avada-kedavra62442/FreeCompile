@@ -58,8 +58,14 @@ function runSimple(source,lang){
  else if(lang==='Vim script'){extractPrintArgs(s,'echo\\s+(.+?)(?:;|$)',env,out)}
  else if(lang==='Perl'){extractPrintArgs(s,'print\\s+(.+?);',env,out)}
  else if(lang==='SQL'){extractPrintArgs(s,'SELECT\\s+(.+?);',env,out)}
+ else if(lang==='Kotlin'||lang==='Swift'||lang==='Scala'){extractPrintArgs(s,'(?:println|print)\\s*\\(([^()]*)\\)',env,out)}
+ else if(lang==='D'||lang==='Pascal'){extractPrintArgs(s,'writeln\\s*\\(([^()]*)\\)',env,out)}
+ else if(lang==='Ada'){extractPrintArgs(s,'Put_Line\\s*\\(([^()]*)\\)',env,out)}
+ else if(lang==='F#'){extractPrintArgs(s,'printfn\\s+("[^"]*")',env,out)}
+ else if(lang==='Elixir'){extractPrintArgs(s,'IO\\.puts\\s*\\(([^()]*)\\)',env,out)}
+ else if(lang==='Clojure'){extractPrintArgs(s,'\\(println\\s+("[^"]*")\\)',env,out)}
  else if(lang==='Fortran'){extractPrintArgs(s,'print\\s*\\*\\s*,\\s*("[^"]*")',env,out)}
- else {extractPrintArgs(s,'(?:print|println|puts|writeln|Put_Line|printfn)\\s*\\(?\\s*([\\s\\S]+?)\\s*\\)?\\s*;?',env,out)}
+ else {}
  if(!out.length){const nonempty=s.trim();if(!nonempty||/^(?:#include|using |import )/.test(nonempty))return {output:'Program finished. No output was produced.',status:'success',engine:'FreeCompile Local Core',note:'Offline language core: output patterns and simple values. Full language semantics and external libraries are not implemented.'};throw Error('The offline '+lang+' core could not interpret this program. Try the supported print/output syntax or use the HTML/JavaScript workspace for full browser execution.');}
  return {output:out.join(''),status:'success',engine:'FreeCompile Local '+lang,note:'Built-in offline core supports common output statements and simple values. It is not a standards-complete compiler and does not load third-party libraries.'};
 }
