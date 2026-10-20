@@ -1,6 +1,6 @@
 # FreeCompile
 
-FreeCompile is an offline-first coding studio built with React and Vite. It does not use a hosted compiler API or redirect code execution to StackBlitz or another browser IDE.
+FreeCompile is an offline-first coding studio built with React and Vite. It does not send source code to hosted compiler APIs or redirect execution to another browser IDE.
 
 ## Run locally
 
@@ -9,24 +9,28 @@ npm install
 npm run dev
 ```
 
-## Build and test
+## Test and build
 
 ```bash
 npm test
 npm run build
 ```
 
-## Execution model
+GitHub Actions runs both checks on pushes and pull requests.
 
-- **HTML/CSS/JavaScript:** previewed in a sandboxed browser iframe.
-- **JSON:** validated and formatted locally.
-- **Python:** a small in-repo interpreter supports basic expressions, variables, `print`, `input`, simple conditionals and `range` loops.
-- **C, C++, C#, PHP and additional languages:** in-repo offline output interpreters cover common starter-program patterns. They are not native compilers or complete implementations of those language specifications.
-- **React/Next.js:** the in-repo JSX preview handles simple components that return intrinsic HTML tags. It is not the full React or Next.js module/build system.
-- **GitHub repository inspection:** GitHub's API is used only when a user explicitly requests public-repository metadata/file-tree inspection. It is not used to compile or execute code.
+## What runs locally
 
-## Important limits
+- **HTML, CSS and JavaScript:** browser sandbox preview.
+- **JSON:** local parsing and formatting.
+- **Python:** an in-repository interpreter for expressions, variables, built-in numeric/string/list helpers, list indexing, `print`, `input`, `if/elif/else`, `for`, `range`, `while`, `break` and `continue`. It enforces an execution-step limit.
+- **C, C++, C#, PHP and additional language workspaces:** small in-repository interpreters for documented common output patterns and simple values.
+- **React / Next.js:** basic JSX-to-HTML preview for components returning intrinsic HTML elements.
+- **Public GitHub project inspection:** used only when explicitly requested to read repository metadata/files; it is not a compiler or execution service.
 
-The offline language cores are built into this repository and make no requests to online compiler services. They do **not** currently support every language feature, every historical/current compiler version, arbitrary third-party libraries, package installation, native binaries, or full-project builds. The UI reports unsupported syntax instead of claiming a real native compile succeeded. Full standards-compliant compilers/runtimes for all those ecosystems would require shipping and maintaining the respective toolchains and library distributions; this repository does not yet contain those complete toolchains.
+## Honest compatibility limits
 
-All source-code execution supported by the studio happens in the browser; do not treat this as a hardened security boundary for hostile code. The JavaScript preview uses a sandboxed iframe.
+FreeCompile currently does **not** contain full native toolchains for C/C++, .NET/C#, PHP, Java, Rust, Go, or every other listed language. Its lightweight local cores are not full language specifications and do not provide every compiler version, standard library, package manager, or third-party library. The React/Next.js workspace is not a full Node.js/Next.js build environment. Unsupported code reports a limitation instead of being described as successfully compiled.
+
+Full support for all language versions and arbitrary libraries would require bundling and maintaining the corresponding compilers/runtimes and library distributions locally; that is a substantially larger engineering and asset-packaging effort than a lightweight browser app. No external online compiler service is connected by this project.
+
+Treat code execution as a learning sandbox, not a hardened security boundary for hostile source. The JavaScript preview uses a sandboxed iframe.
